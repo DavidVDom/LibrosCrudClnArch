@@ -2,9 +2,14 @@ using LibrosCrudClnArch.Presentation.Client.Pages;
 using LibrosCrudClnArch.Presentation.Components;
 using LibrosCrudClnArch.Infrastructure.DI;
 using LibrosCrudClnArch.Application.DI;
+using LibrosCrudClnArch.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ApplicationDbContext>(
+    options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionLibrosCrudDb")));
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

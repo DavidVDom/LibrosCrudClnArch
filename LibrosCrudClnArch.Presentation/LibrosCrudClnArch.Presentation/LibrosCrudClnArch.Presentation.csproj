@@ -10,6 +10,10 @@
     <ProjectReference Include="..\..\LibrosCrudClnArch.Infrastructure\LibrosCrudClnArch.Infrastructure.csproj" />
     <ProjectReference Include="..\LibrosCrudClnArch.Presentation.Client\LibrosCrudClnArch.Presentation.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
