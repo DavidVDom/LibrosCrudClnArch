@@ -1,4 +1,3 @@
-using LibrosCrudClnArch.Presentation.Client.Pages;
 using LibrosCrudClnArch.Presentation.Components;
 using LibrosCrudClnArch.Infrastructure.DI;
 using LibrosCrudClnArch.Application.DI;

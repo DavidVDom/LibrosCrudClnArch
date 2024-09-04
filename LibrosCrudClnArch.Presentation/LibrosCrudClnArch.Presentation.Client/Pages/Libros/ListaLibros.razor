@@ -1,0 +1,77 @@
+﻿@page "/libros"
+@using LibrosCrudClnArch.Domain.Entities
+@using LibrosCrudClnArch.Infrastructure.Repositories
+@inject ILibroRepository LibroRepository
+
+@rendermode InteractiveServer
+
+<PageTitle>Libros Crud</PageTitle>
+
+<h1>CRUD con Blazor Web App</h1>
+
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-dark">Lista de libros</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Descripción</th>
+                    <th>Autor</th>
+                    <th>Páginas</th>
+                    <th>Precio</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var libro in listaLibros)
+                {
+                    <tr>
+                        <td>@libro.Id</td>
+                        <td>@libro.Titulo</td>
+                        <td>@libro.Descripcion</td>
+                        <td>@libro.Autor</td>
+                        <td>@libro.Paginas</td>
+                        <td>@libro.Precio</td>
+                        <td>@libro.Fecha</td>
+                        <td>
+                            <a href="editar-libro/@libro.Id" class="btn btn-success btn-sm">
+                                <span class="oi oi-pencil" aria-hidden="true"></span> Editar
+                            </a>
+                            <button @onclick="@(()=>BorrarLibro(libro.Id))"
+                                    class="btn btn-danger btn-sm">
+                                <span class="oi oi-delete" aria-hidden="true"> Borrar</span>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    // lo suyo sería no usar nunca repositorios desde presentación, si no llamar a un servicio de la capa
+    // de aplicación y que esa devolviera dtos, mapeando las entidades del repositorio con AutoMapper por ejemplo
+    // este proyecto no debería referenciar a infraestructura tampoco (a domain lo referencia indirectamente a
+    // través de application)
+    private List<Libro> listaLibros = new List<Libro>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        listaLibros = await LibroRepository.GetLibrosAsync();
+    }
+
+    private void BorrarLibro(int id)
+    {
+
+    }
+}

@@ -5,6 +5,7 @@ namespace LibrosCrudClnArch.Domain.Entities
     public class Libro
     {
         [Key]
+        // sería preferible un Guid
         public int Id { get; set; }
 
         [Required(ErrorMessage = "El título es obligatorio")]
