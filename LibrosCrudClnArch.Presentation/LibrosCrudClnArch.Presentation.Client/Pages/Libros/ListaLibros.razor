@@ -1,8 +1,14 @@
 ﻿@page "/libros"
-@using LibrosCrudClnArch.Domain.Entities
-@using LibrosCrudClnArch.Infrastructure.Repositories
-@inject ILibroRepository LibroRepository
 
+@using LibrosCrudClnArch.Domain.Entities
+@using LibrosCrudClnArch.Application.DTO
+@using LibrosCrudClnArch.Application.Services
+@inject ILibrosService LibroService
+
+@* TODO: hay un problema, tarda bastante la primera vez, habría que hacer algo con el rendermode o quizás con streaming
+el modo no puede ser InteractiveWebAssembly ni InteractiveAuto, porque para webassembly parece que da un problema si no se
+llama a una API para pedir los datos
+*@
 @rendermode InteractiveServer
 
 <PageTitle>Libros Crud</PageTitle>
@@ -59,15 +65,11 @@
 </div>
 
 @code {
-    // lo suyo sería no usar nunca repositorios desde presentación, si no llamar a un servicio de la capa
-    // de aplicación y que esa devolviera dtos, mapeando las entidades del repositorio con AutoMapper por ejemplo
-    // este proyecto no debería referenciar a infraestructura tampoco (a domain lo referencia indirectamente a
-    // través de application)
-    private List<Libro> listaLibros = new List<Libro>();
+    private List<LibroDto> listaLibros = new List<LibroDto>();
 
     protected override async Task OnInitializedAsync()
     {
-        listaLibros = await LibroRepository.GetLibrosAsync();
+        listaLibros = await LibroService.GetLibrosAsync();
     }
 
     private void BorrarLibro(int id)

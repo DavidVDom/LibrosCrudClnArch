@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\LibrosCrudClnArch.Application\LibrosCrudClnArch.Application.csproj" />
-    <ProjectReference Include="..\..\LibrosCrudClnArch.Infrastructure\LibrosCrudClnArch.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

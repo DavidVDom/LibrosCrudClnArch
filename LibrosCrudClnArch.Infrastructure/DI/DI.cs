@@ -1,4 +1,5 @@
-﻿using LibrosCrudClnArch.Infrastructure.Repositories;
+﻿using LibrosCrudClnArch.Application.Abstractions;
+using LibrosCrudClnArch.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LibrosCrudClnArch.Infrastructure.DI

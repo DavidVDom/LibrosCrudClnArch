@@ -1,4 +1,5 @@
-﻿using LibrosCrudClnArch.Domain.Entities;
+﻿using LibrosCrudClnArch.Application.Abstractions;
+using LibrosCrudClnArch.Domain.Entities;
 using LibrosCrudClnArch.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 

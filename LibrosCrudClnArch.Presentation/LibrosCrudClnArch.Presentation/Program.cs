@@ -1,11 +1,14 @@
-using LibrosCrudClnArch.Presentation.Components;
-using LibrosCrudClnArch.Infrastructure.DI;
 using LibrosCrudClnArch.Application.DI;
+using LibrosCrudClnArch.Application.Mapper;
 using LibrosCrudClnArch.Infrastructure.Data;
+using LibrosCrudClnArch.Infrastructure.DI;
+using LibrosCrudClnArch.Presentation.Components;
 using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionLibrosCrudDb")));

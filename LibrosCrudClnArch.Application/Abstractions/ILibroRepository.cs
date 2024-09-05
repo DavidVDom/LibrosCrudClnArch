@@ -1,6 +1,6 @@
 ﻿using LibrosCrudClnArch.Domain.Entities;
 
-namespace LibrosCrudClnArch.Infrastructure.Repositories
+namespace LibrosCrudClnArch.Application.Abstractions
 {
     public interface ILibroRepository
     {

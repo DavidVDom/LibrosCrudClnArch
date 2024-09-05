@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\LibrosCrudClnArch.Application\LibrosCrudClnArch.Application.csproj" />
     <ProjectReference Include="..\..\LibrosCrudClnArch.Infrastructure\LibrosCrudClnArch.Infrastructure.csproj" />
     <ProjectReference Include="..\LibrosCrudClnArch.Presentation.Client\LibrosCrudClnArch.Presentation.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.8" />
