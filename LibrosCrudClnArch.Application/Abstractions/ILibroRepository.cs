@@ -4,10 +4,10 @@ namespace LibrosCrudClnArch.Application.Abstractions
 {
     public interface ILibroRepository
     {
-        public Task<List<Libro>> GetLibrosAsync();
-        public Task<Libro> GetLibroAsync(int id);
-        public Task<Libro> AddLibroAsync(Libro libro);
-        public Task<Libro> UpdateLibroAsync(int id, Libro libro);
-        public Task DeleteLibroAsync(int id);
+        Task<List<Libro>> GetLibrosAsync();
+        Task<Libro> GetLibroAsync(int id);
+        Task<Libro> AddLibroAsync(Libro libro);
+        Task<Libro> UpdateLibroAsync(int id, Libro libro);
+        Task DeleteLibroAsync(int id);
     }
 }

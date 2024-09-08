@@ -1,9 +1,8 @@
 ﻿@page "/libros"
+@* @attribute [StreamRendering(true)] *@
 
-@using LibrosCrudClnArch.Domain.Entities
-@using LibrosCrudClnArch.Application.DTO
-@using LibrosCrudClnArch.Application.Services
-@inject ILibrosService LibroService
+@inject ILibrosService libroService
+@inject NavigationManager navigationManager
 
 @* TODO: hay un problema, tarda bastante la primera vez, habría que hacer algo con el rendermode o quizás con streaming
 el modo no puede ser InteractiveWebAssembly ni InteractiveAuto, porque para webassembly parece que da un problema si no se
@@ -14,6 +13,7 @@ llama a una API para pedir los datos
 <PageTitle>Libros Crud</PageTitle>
 
 <h1>CRUD con Blazor Web App</h1>
+<h3>Lista de libros</h3>
 
 <div class="card">
     <div class="card-header">
@@ -69,11 +69,15 @@ llama a una API para pedir los datos
 
     protected override async Task OnInitializedAsync()
     {
-        listaLibros = await LibroService.GetLibrosAsync();
+        listaLibros = await libroService.GetLibrosAsync();
     }
 
-    private void BorrarLibro(int id)
+    private async void BorrarLibro(int id)
     {
-
+        await libroService.DeleteLibroAsync(id);
+        listaLibros = await libroService.GetLibrosAsync();
+        // por algún motivo la línea anterior no refresca la lista en la vista
+        // lo siguiente no debería ser necesario
+        navigationManager.NavigateTo(navigationManager.Uri, true);
     }
 }

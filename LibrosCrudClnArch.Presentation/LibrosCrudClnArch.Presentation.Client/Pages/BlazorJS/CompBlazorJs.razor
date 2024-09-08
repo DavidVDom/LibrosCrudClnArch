@@ -1,0 +1,83 @@
+﻿@page "/blazor-js"
+@inject IJSRuntime JsRuntime
+
+@* este parece funcionar bien sin errores en la consola con InteractiveWebAssembly, InteractiveServer
+e InteractiveAuto, con los tres *@
+@rendermode InteractiveAuto
+
+<h3>Blazor/JavaScript</h3>
+
+<div class="row mt-4">
+    <div class="col-4">
+        <button class="btn btn-secondary" @onclick="(()=>DemoConfirmacion(MensajeConfirmacion))">
+            Demo confirmar
+        </button>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-4">
+        @if (ConfirmarResultado)
+        {
+            <p class="alert alert-info text-primary">Confirmado</p>
+        }
+        else
+        {
+            <p class="alert alert-warning text-danger">Confirmación pendiente</p>
+        }
+    </div>
+</div>
+
+@* toastr (y su dependencia jQuery) se añade en App.razor y se configura en common.js *@
+
+<div class="row mt-4">
+    <div class="col-12">
+        <button class="btn btn-success" @onclick="DemoSuccess">
+            Demo Toastr Success
+        </button>
+        <button class="btn btn-danger" @onclick="DemoError">
+            Demo Toastr Error
+        </button>
+        <button class="btn btn-info" @onclick="DemoInfo">
+            Demo Toastr Info
+        </button>
+        <button class="btn btn-warning" @onclick="DemoWarning">
+            Demo Toastr Warning
+        </button>
+    </div>
+</div>
+
+@code {
+    private string MensajeConfirmacion = "Has dado click, mira qué risa";
+    private bool ConfirmarResultado { get; set; }
+
+    private async Task DemoConfirmacion(string mensaje)
+    {
+        // con este método estamos llamando simplemente a un confirm de js
+        ConfirmarResultado = await JsRuntime.InvokeAsync<bool>("confirm", mensaje);
+    }
+
+    private async Task DemoSuccess()
+    {
+        // usamos un método de extensión de IJSRuntime que implementamos en IJsHelper
+        // para llamar a un método personalizado en vez de a InvokeVoidAsync
+        // await JsRuntime.InvokeVoidAsync("ShowToastr", "success", "Tarea completada");
+        await JsRuntime.ToastrSuccess("Tarea completada, mira qué bien");
+    }
+
+    private async Task DemoError()
+    {
+        // await JsRuntime.InvokeVoidAsync("ShowToastr", "error", "Error en tarea");
+        await JsRuntime.ToastrError("Oops, vaya, Error en tarea");
+    }
+
+    private async Task DemoInfo()
+    {
+        await JsRuntime.InvokeVoidAsync("ShowToastr", "info", "Info tarea");
+    }
+
+    private async Task DemoWarning()
+    {
+        await JsRuntime.InvokeVoidAsync("ShowToastr", "warning", "Warning tarea");
+    }
+}

@@ -45,4 +45,6 @@ app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(LibrosCrudClnArch.Presentation.Client._Imports).Assembly);
 
+app.UseStatusCodePagesWithRedirects("/404");
+
 app.Run();
